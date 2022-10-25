@@ -86,7 +86,10 @@ name: sentinel-overview
 
 - It supports fine-grained policies that use conditional logic.
   - For example - "Is this image in the supported images list?"
-  
+???
+
+Adding some notes Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+
 ???
 
 Sentinel is a policy as code language. Sentinel enables fine grained logic based policies such as legal, regulatory, and compliance frameworks to be codified. Everyone here is familiar with Terraform, so Sentinel is the policy framework to what Terraform is to Infrastructure as code. Where Terraform allows you to codify the infrastructure and definte that repatable consumable pattern. It is its own language that is based on HCL and JSON patterns. It supports fine grained and logical policies. So not only can we validate things like if a image is supported, or can this be done in this region for this cloud, or if this provider can actually be used in my organsization but also do conditional logic. No provisioning after 5 pm, no provisioning on weekends, cost estimaization consumptions, valdiating that im not going to overspend for particular workflows. 
