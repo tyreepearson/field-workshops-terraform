@@ -25,7 +25,7 @@ background-size: cover
 ---
 layout: true
 
-background-image: url(../images/bkgs/HashiCorp-Content-bkg.png)
+background-image: url(../slides/images/bkgs/HashiCorp-Content-bkg.png)
 background-size: cover
 
 ---
@@ -33,7 +33,7 @@ name: slide-deck
 exclude: true
 class: img-left-full
 
-![](../images/laptop.jpg)
+![](../slides/images/laptop.jpg)
 
 <br><br><br>
 .center[
@@ -99,10 +99,12 @@ name: sentinel-overview2
 - Policy as Code takes your excel spreadsheets, legal, regulatory requirement documents and individual security best practice knowledge and turns it into Code.
 
 .center[
-![:scale 100%](../images/policy in excel.png)
+![:scale 100%](../slides/images/policy in excel.png)
 ]
 
 - (allowed_types = [”350xlarge”,”289ssmall”,”101xssmall”])
+
+??? Sentinel within terraform is apart of your provisoning workflow. You know the Terraform workflow to go through the terraform plan stage then the apply stage. the plan goes through the dry run no-op mode providing a guessimatiztion on  what would go through on an apply and hitting that target api. With sentinel we can pause this workflow and evluate some criteria. 
 
 
 ---
@@ -175,7 +177,7 @@ name: without-sentinel
 
 <br>
 .center[
-![:scale 100%](../images/sentinel-without-workflow.png)
+![:scale 100%](../slides/images/sentinel-without-workflow.png)
 ]
 
 ---
@@ -183,7 +185,7 @@ name: with-sentinel
 # Terraform With Sentinel
 
 .center[
-![:scale 100%](../images/sentinel-with-workflow.png)
+![:scale 100%](../slides/images/sentinel-with-workflow.png)
 ]
 
 ---
@@ -191,7 +193,7 @@ name: policys-passed
 # All Policy Checks Passed
 
 .center[
-![:scale 90%](../images/checks-passed.png)
+![:scale 90%](../slides/images/checks-passed.png)
 ]
 
 ---
@@ -199,7 +201,7 @@ name: policys-passed2
 # All Policy Checks Passed
 
 .center[
-![:scale 90%](../images/checks-passed-verbose.png)
+![:scale 90%](../slides/images/checks-passed-verbose.png)
 ]
 
 ---
@@ -224,7 +226,7 @@ name: soft-mandatory
 # A Soft Mandatory Policy Check Was Overridden
 
 .center[
-![:scale 90%](../images/soft-mandatory.png)
+![:scale 90%](../slides/images/soft-mandatory.png)
 ]
 
 ---
@@ -299,7 +301,7 @@ name: behind-the-scenes
 # The Engine Behind the Scenes
 
 .center[
-![:scale 100%](../images/sentinel-logic.png)
+![:scale 100%](../slides/images/sentinel-logic.png)
 ]
 
 ---
@@ -307,7 +309,7 @@ name: what-does-it-look-like
 # What Does a Sentinel Check Look Like?
 
 .center[
-![:scale 80%](../images/show-sentinel.png)
+![:scale 80%](../slides/images/show-sentinel.png)
 ]
 
 ---
@@ -315,7 +317,7 @@ name: normal-view
 # The UI View
 
 .center[
-![:scale 90%](../images/sentinel-check-yes-no.png)
+![:scale 90%](../slides/images/sentinel-check-yes-no.png)
 ]
 
 ---
@@ -333,7 +335,7 @@ name: mock-intro
 # Let's Talk About Mocks
 
 .center[
-![:scale 90%](../images/mock-highlight.png)
+![:scale 90%](../slides/images/mock-highlight.png)
 ]
 
 ---
@@ -346,7 +348,7 @@ name: mock-intro
 - Using the Sentinel CLI with mocks speeds up development of new policies since additional plans do not need to be run.
 
 .center[
-![:scale 70%](../images/where-mock.png)
+![:scale 70%](../slides/images/where-mock.png)
 ]
 
 ---
@@ -571,7 +573,7 @@ name: policy-intro-1
 # Your First Policy – Imports
 
 .center[
-![:scale 100%](../images/policy-intro-1.png)
+![:scale 100%](../slides/images/policy-intro-1.png)
 ]
 
 ---
@@ -628,7 +630,7 @@ name: policy-intro-1
 # Your First Policy – Imports: Functions
 
 .center[
-![:scale 100%](../images/policy-intro-1.png)
+![:scale 100%](../slides/images/policy-intro-1.png)
 ]
 
 ---
@@ -727,7 +729,7 @@ name: policy-intro-2
 # Sentinel Policy Introduction – Concepts (2)
 
 .center[
-![:scale 100%](../images/policy-intro-2.png)
+![:scale 100%](../slides/images/policy-intro-2.png)
 ]
 
 ---
@@ -735,7 +737,7 @@ name: policy-intro-3
 # Sentinel Policy Introduction – Concepts (3)
 
 .center[
-![:scale 100%](../images/policy-intro-3.png)
+![:scale 100%](../slides/images/policy-intro-3.png)
 ]
 
 ---
@@ -743,7 +745,7 @@ name: policy-intro-4
 # Sentinel Policy Introduction – Concepts (4)
 
 .center[
-![:scale 100%](../images/policy-intro-4.png)
+![:scale 100%](../slides/images/policy-intro-4.png)
 ]
 
 ---
@@ -751,7 +753,7 @@ name: policy-intro-5
 # Sentinel Policy Introduction – Concepts (5)
 
 .center[
-![:scale 100%](../images/policy-intro-5.png)
+![:scale 100%](../slides/images/policy-intro-5.png)
 ]
 
 ---
@@ -842,7 +844,7 @@ name: authoring-workflow-diagram
 #Authoring Workflow Diagram
 
 .center[
-![:scale 100%](../images/authoring.png)
+![:scale 100%](../slides/images/authoring.png)
 ]
 
 ---
@@ -919,7 +921,7 @@ name: methodology-6
 #  Step 2 - Create a Workspace in the TFC/TFE UI
 
 .center[
-![:scale 90%](../images/create-a-workspace.png)
+![:scale 90%](../slides/images/create-a-workspace.png)
 ]
 
 ---
@@ -927,7 +929,7 @@ name: methodology-7
 # Set Variables in Your Workspace
 
 .center[
-![:scale 70%](../images/set-variables.png)
+![:scale 70%](../slides/images/set-variables.png)
 ]
 
 ---
@@ -937,7 +939,7 @@ name: methodology-9
 Start a Terraform Plan then get your Mocks!
 
 .center[
-![:scale 85%](../images/generate-mocks.png)
+![:scale 85%](../slides/images/generate-mocks.png)
 ]
 
 ???
@@ -955,7 +957,7 @@ name: methodology-9
 # You are Here - Step 5
 
 .center[
-![:scale 100%](../images/authoring-here.png)
+![:scale 100%](../slides/images/authoring-here.png)
 ]
 
 ---
@@ -1100,7 +1102,7 @@ name: setup-test
 name: file-structure
 
 .center[
-  ![:scale 90%](../images/file-structure.png)
+  ![:scale 90%](../slides/images/file-structure.png)
 ]
 
 ---
@@ -1222,7 +1224,7 @@ name: testing-policy-loop
 
 
 .center[
-![:scale 100%](../images/authoring-next.png)
+![:scale 100%](../slides/images/authoring-next.png)
 ]
 
 ---
@@ -1293,7 +1295,7 @@ name: creating-policies
 name: policy-sets
 
 .center[
-![:scale 60%](../images/create-policy-sets.png)
+![:scale 60%](../slides/images/create-policy-sets.png)
 ]
 
 ---
@@ -1319,7 +1321,7 @@ name: policy-fails
 # Sentinel Policy that Fails
 
 .center[
-![:scale 100%](../images/policy-fails.png)
+![:scale 100%](../slides/images/policy-fails.png)
 ]
 
 ---
@@ -1327,7 +1329,7 @@ name: policy-fail-example
 # Sentinel Policy that Fails
 
 .center[
-![:scale 100%](../images/sentinel-policy-fails.png)
+![:scale 100%](../slides/images/sentinel-policy-fails.png)
 ]
 
 ---
@@ -1335,7 +1337,7 @@ name: policy-pass
 # Sentinel Policy that Passes
 
 .center[
-![:scale 90%](../images/sentinel-policy-pass.png)
+![:scale 90%](../slides/images/sentinel-policy-pass.png)
 ]
 
 ---
@@ -1343,7 +1345,7 @@ name: policy-pass-example
 # Sentinel Policy that Passes
 
 .center[
-![:scale 90%](../images/policy-pass-example.png)
+![:scale 90%](../slides/images/policy-pass-example.png)
 ]
 
 ---
@@ -1789,7 +1791,7 @@ name: tfplan-import
 # The tfplan/v2 Import
 
 .center[
-![:scale 70%](../images/tfplan-import.png)
+![:scale 70%](../slides/images/tfplan-import.png)
 ]
 
 ---
@@ -1878,7 +1880,7 @@ name: tfstate-import
 # The tfstate/v2 Import
 
 .center[
-![:scale 80%](../images/tfstate-import.png)
+![:scale 80%](../slides/images/tfstate-import.png)
 ]
 
 ---
@@ -1970,7 +1972,7 @@ name: tfconfig-import
 # The tfconfig/v2 Import
 
 .center[
-![:scale 90%](../images/tfconfig-import.png)
+![:scale 90%](../slides/images/tfconfig-import.png)
 ]
 
 ---
@@ -1978,7 +1980,7 @@ name: tfconfig-import-2
 # The tfconfig/v2 Import Expressions
 
 .center[
-![:scale 90%](../images/tfconfig-expression.png)
+![:scale 90%](../slides/images/tfconfig-expression.png)
 ]
 
 - Expressions in the tfconfig/v2 collections are ultimately represented by constant_value fields or by references lists, depending on whether they were constant or required evaluation.
