@@ -86,8 +86,10 @@ name: sentinel-overview
 
 - It supports fine-grained policies that use conditional logic.
   - For example - "Is this image in the supported images list?"
+  
+??? 
 
-
+Sentinel is a policy as code language. Sentinel enables fine grained logic based policies such as legal, regulatory, and compliance frameworks to be codified. Everyone here is familiar with Terraform, so Sentinel is the policy framework to what Terraform is to Infrastructure as code. Where Terraform allows you to codify the infrastructure and definte that repatable consumable pattern. It is its own language that is based on HCL and JSON patterns. It supports fine grained and logical policies. So not only can we validate things like if a image is supported, or can this be done in this region for this cloud, or if this provider can actually be used in my organsization but also do conditional logic. No provisioning after 5 pm, no provisioning on weekends, cost estimaization consumptions, valdiating that im not going to overspend for particular workflows. 
 
 ---
 name: sentinel-overview2
@@ -105,8 +107,9 @@ name: sentinel-overview2
 - (allowed_types = [”350xlarge”,”289ssmall”,”101xssmall”])
 
 ??? 
-Sentinel within terraform is apart of your provisoning workflow. You know the Terraform workflow to go through the terraform plan stage then the apply stage. the plan goes through the dry run no-op mode providing a guessimatiztion on  what would go through on an apply and hitting that target api. With sentinel we can pause this workflow and evluate some criteria. 
 
+Sentinel within terraform is apart of your provisoning workflow. You know the Terraform workflow to go through the terraform plan stage then the apply stage. the plan goes through the dry run no-op mode providing a guessimatiztion on  what would go through on an apply and hitting that target api. With sentinel we can pause this workflow and evluate some criteria. It ensures that your polices are checked everytime terraform runs 
+whether its througth a pipeline, cli, vcs, or through the gui. Takes your typical excel spreadsheet and codifies this. Turining these legal and regulartory requirements to fit into your workflow. This example here displays a instance type requirement that would be done with excel for a standard organiszation. We have these different requirements for allowed instance types. Sentinel will check to make sure these requirements are being followed otherwise throw some failed check.
 
 ---
 name: benefits-of-policy
