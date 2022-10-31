@@ -856,7 +856,7 @@ name: policy-intro-2
 
 ???
 
-after importing a function and naming it as config then we are going to do is validate the criteria ( this is the allowed list). next we are goign to go find all the rsources inside the TF configuration. This is gong to go out and query the terraform code and get every resource and defined in this allResources variable. Then we will evaluate, this is going to check whether these resources are within this allowed_list critera. Then finally is the main rule, you can have one or many rules, but you always need at least one rule that is declared as main. Main is the final critera that will return true or false. 
+after importing a function and naming it as config then we are going to do is validate the criteria ( this is the allowed list).
 ---
 name: policy-intro-3
 # Sentinel Policy Introduction – Concepts (3)
@@ -865,6 +865,8 @@ name: policy-intro-3
 ![:scale 100%](../slides/images/policy-intro-3.png)
 ]
 
+???
+next we are goign to go find all the rsources inside the TF configuration. This is gong to go out and query the terraform code and get every resource and defined in this allResources variable.
 ---
 name: policy-intro-4
 # Sentinel Policy Introduction – Concepts (4)
@@ -873,6 +875,10 @@ name: policy-intro-4
 ![:scale 100%](../slides/images/policy-intro-4.png)
 ]
 
+???
+
+Then we will evaluate, this is going to check whether these resources are within this allowed_list critera.
+
 ---
 name: policy-intro-5
 # Sentinel Policy Introduction – Concepts (5)
@@ -880,6 +886,11 @@ name: policy-intro-5
 .center[
 ![:scale 100%](../slides/images/policy-intro-5.png)
 ]
+
+???
+
+Then finally is the main rule, you can have one or many rules, but you always need at least one rule that is declared as main. Main is the final critera that will return true or false.
+
 
 ---
 name: chapter-summary
