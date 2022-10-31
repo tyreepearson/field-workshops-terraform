@@ -1231,7 +1231,8 @@ name: common-functions
     - **evaluate_attribute(r, attribute)**
         - The filter functions all call the evaluate_attribute() function that recursively calls itself to evaluate attributes that can be deeply nested inside a resource or data source.
 
-??? 
+???
+
 This function has the following declaration:
 - **evaluate_attribute = func(r, attribute)**
 - The resource passed to the first call to the function should be in the form **rc.change.after** or just rc where rc is a resource change derived by applying filters to **tfplan.resource_changes.**
@@ -1257,6 +1258,11 @@ find_resources = func(type) {
 }
 ```
 
+???
+
+this is a demonstration of what those fine resource are.
+
+
 ---
 name: filter-resources
 class: compact
@@ -1281,6 +1287,10 @@ filter_attribute_not_in_list = func(resources, attr, allowed, prtmsg) {
   return {"resources":violators,"messages":messages}
 ```
 
+???
+
+this is the code for finding an attribute, there are defined function for this
+
 ---
 name: setup-test
 # Step 6 - Set Up the Test Cases
@@ -1291,12 +1301,19 @@ name: setup-test
 - So, for our restrict-ec2-instance-type.sentinel policy:
   - create the **restrict-ec2-instance-type** directory under the test directory.
 
+???
+
+time to setup test cases, these test cases are used to determine whether or not the policy works in a specific condition. you want to make sure you have one test that passes by design and one that fails by design. you want to ensure that if you make a change to the policy or your config that it doesnt break your policy. Looking for different conditions that you can expect that policy to pass or fail. 
 ---
 name: file-structure
 
 .center[
   ![:scale 90%](../slides/images/file-structure.png)
 ]
+
+???
+
+what the file structure looks like for tests. for the most part you will have a test folder that will have the folder for the type of test and then have mock files in there. you dont have to put the mock files in there but it is an approach. 
 
 ---
 name: copy-mocks
@@ -1306,6 +1323,10 @@ name: copy-mocks
   - Change the name of the mock file to **mock-tfplan-pass.sentinel.**
   - Create a second copy of the file called **mock-tfplan-fail.sentinel.**
       - Create **pass.hcl** and **fail.hcl** files that have the text on the next two slides respectively.
+
+???
+
+you hook the test cases into the mock. this will get you to a place where you will be able to perform the test. 
 
 ---
 name: pass-hcl
@@ -1327,6 +1348,10 @@ test {
 }
 ```
 
+???
+
+this is an example of a pass test case. its a good idea to use the word pass so its easy to understand which rules do or dont pass. When you run in a test environment, the test case is defining what the tfplan-function means, which maps to a specific file. the source does not have to be local you can use http to get files from somewhere else. Normally in TFC run workflow the tfplan get data at run time from the workspace run. no matter what you're importing during the test proccess you have to import it during the test definition so the policy knows where to look for the information. The last part test block is what the test expects to be true. If the test is considered to be a success what do we want in return. 
+
 ---
 name: fail-hcl
 # The fail.hcl Test Case
@@ -1347,6 +1372,9 @@ test {
 }
 ```
 
+???
+
+the fail test has a fail test file name and returns a false value. An example of a use case is an instance with tags that you want to test, so you create a instance that has and one that does not have a tag so you can test that each use case is returning the correct value.  
 ---
 name: pass-mock
 # Create your Pass Mock
@@ -1355,6 +1383,9 @@ name: pass-mock
   - Make sure that all values of **instance_type** are set to a valid value
       - such as **"t2.small"** that is in the allowed_types list.
 
+???
+
+So this is creating the different mock files and use cases
 ---
 name: fail-mock
 # Create your Fail Mock
@@ -1363,6 +1394,9 @@ name: fail-mock
   - Make sure that at least one value of **instance_type** is set to a invalid value
       - such as **"m5.large"** that is not in the allowed_types list.
 
+???
+
+example here is talking about instance sizes.
 ---
 name: pass-fail
 # Testing Best Practices
@@ -1371,6 +1405,9 @@ name: pass-fail
 - Sometimes, you will want multiple fail test cases and corresponding mocks.
 - You might even want more than 1 pass test case and mock.
 
+???
+
+Its important that as your tf practice grows and expands, that you update the mocks. you dont want to run into issues based on old mocks that no longer reflect whats in use based on the current provider upgrades. you might have certain circumstances that one workspace uses a different version of their provider so the mocks download need to match that version.
 ---
 name: polcy-with-cli
 # Test Your Policy with the CLI
@@ -1382,6 +1419,9 @@ name: polcy-with-cli
   - To see the outputs of the print statements, change this to:
       - **sentinel test –verbose restrict-ec2-instance-type.sentinel**
 
+???
+
+you can specify indivual policies to test otherwise it will test every policy you are running. because its cli you can test in CI/CD pipelines. you want to be able to automatically test these sentinel policies within a vcs workflow and promote automation for simple policies. 
 ---
 name: policy-with-cli
 # Test Your Policy with the CLI
@@ -1393,6 +1433,9 @@ PASS - restrict-ec2-instance-type.sentinel
   PASS - test/restrict-ec2-instance-type/pass.hcl
 ```
 
+???
+
+this is what it looks like, it will show what passed, so if the policy fails, and shows a PASS is good because we wanted it to fail. 
 ---
 name: policy-with-cli
 # Test Your Policy with the CLI
@@ -1411,6 +1454,9 @@ PASS - restrict-ec2-instance-type.sentinel
       	Description: Main rule Value: true
 ```
 
+???
+
+IT also puts some of the senintel output based on a verbose specification.
 ---
 name: testing-policy-loop
 # Iteration Loop
@@ -1420,6 +1466,9 @@ name: testing-policy-loop
 ![:scale 100%](../slides/images/authoring-next.png)
 ]
 
+???
+
+as you make a change to policy, run a test, as you use different modules, different version of providers, run these tets and download up to date mocks. 
 ---
 name: chapter-4-summary
 # Chapter 4 Summary
@@ -1429,6 +1478,8 @@ name: chapter-4-summary
 - Remember [common functions](https://github.com/hashicorp/terraform-sentinel-policies/tree/main/common-functions) and [policy examples](https://github.com/hashicorp/terraform-sentinel-policies) exist!
 
 - **Next Chapter - Final Step - Deploying Policies**
+
+???
 
 ---
 name: references
@@ -1472,6 +1523,9 @@ name: test-policies
   - You won't see results from other policies.
   - You won't have to worry about overriding soft-mandatory failures.
 
+???
+
+Now we are getting into this chapter where we are going to learn how to apply these policies after youve tested them. we recommended to put each policy into a specific policy set. That when you do apply these policy sets you can add them to the workspace level or the organsization level. The theory here is the same as we preach with all our products is the crawl walk run progression. so start off small and grannuliar at the advisory level then make your way up. 
 ---
 name: creating-policies
 # Creating Policy Sets with Policies
@@ -1484,6 +1538,9 @@ name: creating-policies
 - You can specify **Parameters** for it including sensitive ones.
 - You determine the workspaces it should be enforced on.
 
+???
+
+Policy sets are a group of policies, this is usually brought in with a vcs repo. in this repo you have to have at least one file called the sentinel.hcl which specifies the 
 ---
 name: policy-sets
 
