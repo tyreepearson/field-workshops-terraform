@@ -1009,7 +1009,10 @@ name: methodology-1
 - Bonus Tip
   - **Create more than one instance to test positive and negative**
 
-??? the registry has alot of information on how to build about basic resources
+??? 
+
+the registry has alot of information on how to build about basic resources
+
 ---
 name: methodology-1
 # Create a Terraform Configuration: main.tf
