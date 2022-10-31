@@ -506,6 +506,7 @@ There are essentially four types of Terraform Sentinel policies corresponding to
 ???
 
 Here are a couple examples for each of the individual mock types. Day two will have you write each of your inidividual policies so this process here is to help you understand what it looks like and getting started. The tfplan allows us to restrict specific attributes of specific resources and data sources in the current plan
+
 ---
 name: types-of-policies-1
 # Types of Terraform Sentinel Policies (1)
@@ -514,7 +515,9 @@ name: types-of-policies-1
   - restricts the configuration of Terraform modules, variables, resources, data sources, providers, provisioners, and outputs.
       - `# List of allowed resources allowed_list = ["aws_instance", "azurerm_virtualmachine", "google_compute_instance"]`
   
-??? TF config validates you are only using supported resources, modules, data sources, or providers. WE test to make sure we only use modules internally that are validated. We can go through to make sure you are only using modules from the private module registry.  
+???
+
+TF config validates you are only using supported resources, modules, data sources, or providers. WE test to make sure we only use modules internally that are validated. We can go through to make sure you are only using modules from the private module registry.  
 
 ---
 name: types-of-policies-2
@@ -523,7 +526,9 @@ name: types-of-policies-2
 - Policies can use the tfstate import
   - checks whether previously provisioned resources or data sources have attributes with values that are no longer allowed.
 
-??? A great way to add check all your previously previsioned resources
+??? 
+
+A great way to add check all your previously previsioned resources
 ---
 name: types-of-policies-3
 # Types of Terraform Sentinel Policies (3)
@@ -532,7 +537,9 @@ name: types-of-policies-3
   - checks workspace and run metadata and whether cost estimates for planned resources are within limits.
       - `# Determine proposed monthly cost proposed_cost = decimal.new(tfrun.cost_estimate.proposed_monthly_cost)`
 
-??? this can check run data and the cost estimation.
+??? 
+
+this can check run data and the cost estimation.
 ---
 name: chapter-summary
 # Chapter Summary
@@ -543,7 +550,9 @@ name: chapter-summary
   - Mocks can be generated from Terraform Cloud
   - Mocks can then be tested with **Sentinel CLI**
 
-??? overview of everything
+??? 
+
+overview of everything
 ---
 class: title, smokescreen, shelf
 background-image: url(https://hashicorp.github.io/field-workshops-assets/assets/bkgs/HashiCorp-Title-bkg.jpeg)
@@ -642,7 +651,9 @@ name: chapter3-intro
 - Writing your own Policies **From Scratch**
   - Advanced Sentinel Language
 
-??? going to go over common components and functionality in sentinel. look at functions, then go to writting your own policies from scratch.
+???
+
+going to go over common components and functionality in sentinel. look at functions, then go to writting your own policies from scratch.
 ---
 name: policy-intro-0
 # Your First Policy – Concepts
@@ -657,7 +668,9 @@ name: policy-intro-0
 - Test
 - Print
 
-??? This is going to be the validation critera that e would see the in the cli. we also have to declare the critera that we are going to validate, so the VMs, networking ports, etc. The core cocept of a policy is the imports. ( all the data, functions, library that you need to use inside of sentinel policy ) then declare a set of critera. then define all the resource that you want to test against that critera. 
+??? 
+
+This is going to be the validation critera that e would see the in the cli. we also have to declare the critera that we are going to validate, so the VMs, networking ports, etc. The core cocept of a policy is the imports. ( all the data, functions, library that you need to use inside of sentinel policy ) then declare a set of critera. then define all the resource that you want to test against that critera. 
 ---
 name: policy-intro-1
 # Your First Policy – Imports
@@ -666,6 +679,9 @@ name: policy-intro-1
 ![:scale 100%](../slides/images/policy-intro-1.png)
 ]
 
+???
+
+Cloud agnostic basic policy, these policies below are these basic policies that can be used across any cloud
 ---
 name: what-is-import
 # What is an Import?
@@ -678,6 +694,9 @@ name: what-is-import
   - For example, the import:json capability allows you to parse and access a JSON document
   - Using import we can also consume **common functions** built by power users
 
+???
+
+import is a generic term across alot of different programing languages. In sentinel import is any way that you import data so it can be consumed, its similar to how python or C++ that allow you to import some type of function.  In particluar we are going to be focused on functions in this chapter. We are going to be importing search functions, json functions, and the other set of common imports.
 ---
 name: sentinel-imports
 # Standard Sentinel Imports
@@ -697,7 +716,7 @@ name: sentinel-imports
 
 ???
 
-Highlighting 2 as they are the most important
+These functions are commonly used. HTTP allowing you to validate and pull dat from a url. Json since everything in HCL and hashicorp is json related. Time is good to add structure to policies with a date or time focused solution. to These Highlighting 2 as they are the most important
 
 ---
 name: example-operations
@@ -715,6 +734,9 @@ name: example-operations
   - **json.unmarshal(response.body)**
   - **Most HashiCorp configuration and data is in JSON**
 
+???
+
+Couple of example functions, these are some of the first things you want to do. check the strings to see if they have some subset thing type of policy. check the type of the object. Use http to do a get query and query something like a chat bot, email api endpoint, or really any type of api endpoint. then use the data from the api and check the strings within that. 
 ---
 name: policy-intro-1
 # Your First Policy – Imports: Functions
@@ -723,6 +745,9 @@ name: policy-intro-1
 ![:scale 100%](../slides/images/policy-intro-1.png)
 ]
 
+???
+
+there are data imports and function imports
 ---
 name: functions-intro
 # What are Functions?
@@ -738,6 +763,9 @@ find_resources = func(resource_type) {
 }
 ```
 
+???
+
+a function is just a tool set to allow you to repeat a particular task. This is declared with the keyword "func" 
 ---
 name: functions-again
 # What are Functions?
@@ -754,6 +782,10 @@ find_resources = func(resource_type) {
 - Every function must return a value such as **true**.
 - A call to this function could look like:
   - **s3_buckets = find_resources("aws_s3_bucket")**
+
+???
+
+There are a set of predefined functions that you can use for the a resource. each function can have zero or more paramaters. these paramaters give you the ability to change individual functions depending on that set of values within the parameter. This s3_bucket variable is going to get the data from find_resources function and look at all values with the same string as a("aws_s3_bucket"). this identifies this resource and gives you the s3_bucket data values.
 
 ---
 name: policy-deep-dive
@@ -780,7 +812,7 @@ Execute various statements and return a value.
 
 ???
 
-We wont teach writing functions in this class
+We wont teach writing functions in this class, but this is what a full function looks like. 
 
 ---
 name: functions-intro
@@ -798,7 +830,7 @@ name: functions-intro
 
 ???
 
-We won't discuss modules or the structure or writing of modules in this, all you need to know is functions come from modules
+We won't discuss modules or the structure or writing of modules in this, all you need to know is functions come from modules. These are alot of great starting functions to get started. 
 
 ---
 name: builtin-functions
@@ -822,6 +854,9 @@ name: policy-intro-2
 ![:scale 100%](../slides/images/policy-intro-2.png)
 ]
 
+???
+
+after importing a function and naming it as config then we are going to do is validate the criteria ( this is the allowed list). next we are goign to go find all the rsources inside the TF configuration. This is gong to go out and query the terraform code and get every resource and defined in this allResources variable. Then we will evaluate, this is going to check whether these resources are within this allowed_list critera. Then finally is the main rule, you can have one or many rules, but you always need at least one rule that is declared as main. Main is the final critera that will return true or false. 
 ---
 name: policy-intro-3
 # Sentinel Policy Introduction – Concepts (3)
