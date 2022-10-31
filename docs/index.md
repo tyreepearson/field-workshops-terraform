@@ -1540,7 +1540,8 @@ name: creating-policies
 
 ???
 
-Policy sets are a group of policies, this is usually brought in with a vcs repo. in this repo you have to have at least one file called the sentinel.hcl which specifies the 
+Policy sets are a group of policies, this is usually brought in with a vcs repo. in this repo you have to have at least one file called the sentinel.hcl which specifies the enforcement level as well. 
+
 ---
 name: policy-sets
 
@@ -1566,6 +1567,10 @@ policy "restrict-ec2-instance-type" {
 
 ```
 
+??? 
+
+Here is an example policy set might look like in your code. all of this can be exposed through the api as well.
+
 ---
 name: policy-fails
 # Sentinel Policy that Fails
@@ -1574,6 +1579,9 @@ name: policy-fails
 ![:scale 100%](../slides/images/policy-fails.png)
 ]
 
+???
+
+when you are apply your policy set, this is an example of a hard mandatory set fails. this does not allow an override
 ---
 name: policy-fail-example
 # Sentinel Policy that Fails
@@ -1582,6 +1590,9 @@ name: policy-fail-example
 ![:scale 100%](../slides/images/sentinel-policy-fails.png)
 ]
 
+???
+
+this is an example output of that policy, will show you which policy fails and the description of that policy. all of this you can customize this output to be whatever you want, so if you wanted to put a link to like a conflunce wiki you can do that as well. 
 ---
 name: policy-pass
 # Sentinel Policy that Passes
@@ -1590,6 +1601,9 @@ name: policy-pass
 ![:scale 90%](../slides/images/sentinel-policy-pass.png)
 ]
 
+???
+
+an example of a pass
 ---
 name: policy-pass-example
 # Sentinel Policy that Passes
@@ -1597,6 +1611,10 @@ name: policy-pass-example
 .center[
 ![:scale 90%](../slides/images/policy-pass-example.png)
 ]
+
+???
+
+an example of a pass and what it looks like 
 
 ---
 name: deploying
@@ -1608,6 +1626,9 @@ name: deploying
 - Also add any parameters the policy requires to your policy set.
 - And add references to any Sentinel Modules that policies in it use.
 
+???
+
+you can add a policy to an exisiting policy set, you can add new paramater for the policy may require, add comments to make it more friendly, its all about doing it in stages and pieces. 
 ---
 class: title, smokescreen, shelf
 background-image: url(https://hashicorp.github.io/field-workshops-assets/assets/bkgs/HashiCorp-Title-bkg.jpeg)
@@ -1642,6 +1663,9 @@ name: language-const
 - **Variables:** Store values for use by rules and functions.
 - **Parameters:** Accept inputs passed to policies.
 
+???
+
+These are some key peices on how sentienl works, also general things overall
 ---
 name: language-const-2
 # Key Sentinel Language Constructs (2)
@@ -1658,6 +1682,9 @@ name: language-const-2
 - The **Filter** quantifier expression that returns a subset of a collection.
 - **Imports:** Reusable libraries of Sentinel functions.
 
+???
+
+certain constructs are displayed here
 ---
 name: pre-clared
 class: col-2
@@ -1676,7 +1703,9 @@ Type Conversion Functions:
 - string
 
 ???
-fix later
+
+this is showing different identitifies. 
+
 
 ---
 name: reserved-words
@@ -1708,7 +1737,7 @@ class: col-2
 
 ???
 
-fix later
+here are all the keywords.
 ---
 name: logic-operators
 # Sentinel Numerical and Logical Operators
@@ -1720,6 +1749,9 @@ name: logic-operators
 - **!p**		p is false
 - **not p**		p is false
 
+???
+
+how to do logical comparison. use this for a quick way to build your common functions
 ---
 name: comparison
 # Sentinel Comparison Operators
@@ -1894,6 +1926,9 @@ count: false
 
 ![:scale 10%](https://hashicorp.github.io/field-workshops-assets/assets/logos/logo_terraform.png)
 
+???
+
+is also going into the same type of concepts that detail other debugging techniques, these are the type of slides you use to refer to for help. This arent really the in need of going through since its meant to help you get through the labs.
 ---
 name: debugging
 # Debugging Policies with Errors
