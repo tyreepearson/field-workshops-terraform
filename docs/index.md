@@ -128,7 +128,6 @@ name: benefits-of-policy
 
 Now just like infrastructure as code, the benefit is policy as code. We can use all the same versioning, change control, and collaboration. When i write a policy i can share it with everybody in my organsization, iterate on it, and use it. Just like your terraform code you can do the same thing with sentinel. having it in your version control provider. There is a concept of validating this with mock data, so you can send test or fake data to your validate framework so you know how it reacts when it iterates through this. For example, a virtual machine, the way terraform evaluates this vm as infra as code, sentinel can evalute it all with policy as code. whether the name needs to be particular, the ip block range, whether it has to have an external ip or not. everything you can build with terraform you can validate with sentinel.
 
-
 ---
 name: customer-use-cases
 # How Customers are Using Sentinel in Terraform
@@ -142,6 +141,7 @@ name: customer-use-cases
 **allowed_list = ["aws", "local", "null", "random", "terraform", "tfe"]**
 
 ???
+
 One common example, encrpyted S3 buckets, making sure particular resources dont have access to the public internet. some organsizations only want hashicorp verified providers (dont want partner or open source providers). validate that provsioners arent being used. Here is an example of a validated list to allow certain providers. 
 
 ---
@@ -172,6 +172,7 @@ name: what-does-sentinel-not-do
 - Analyze or limit runtime actions of deployed applications
 
 ???
+
 What sentinel does not do in terraform. sentinel is a proactive validate of your infrastructure, it lives in between that plan and apply phase. Sentinel will not go in and check your environment and remove existing resources that validate those policies. Its not a cloud custodian, or a cloud watch. Its not going to check if a resource attribute is a valid type. so for an instance size, its not going to check if your input "SuperLargeBigInstance" is a valid type for that resource. Its cant go into your invidivual applications and validate things are running in a specific way. 
 
 ---
@@ -185,6 +186,7 @@ name: where-is-sentinel-used
 - This ensures that resources comply with all policies **before** they are provisioned.
 
 ???
+
 Sentinel is used in Terraform cloud during the run interation, there is the plan, the cost estimation, sentinel run, then the apply phase. Sentinel policies have different enforcement levels, mandatory, soft-mandatory, advisory. Most importantly sentinel polcies can validate any of values that come from terrafrom. any of the variables that are configured inside TFC and TFE. Sentinel can validate external information, it uses an HTTP import value. This can go out and query something else and grab that value to validate it prior to sentinel. Hey make sure you have a change ticket before allowing someone to change some infrastructure in terraform, validate a new version of an application before doing an apply. So you can get data from the plan, configuration, state file, any other run data that apart of the TFC, TFE solution. Overall this is meant to prevent for guidlines happening after the apply ( a proactive solution ). 
 ---
 name: without-sentinel
