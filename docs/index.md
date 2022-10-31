@@ -949,6 +949,8 @@ You can use three different methods for testing your Terraform Sentinel policies
   - You can execute automated tests against actual Terraform code by using the Terraform API.
   - You can use the Sentinel Simulator with mocks generated from Terraform plans.
 
+???
+
 ---
 name: authoring-workflow
 # Introducing the Sentinel Authoring Workflow
