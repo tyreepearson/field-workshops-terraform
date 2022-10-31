@@ -1085,7 +1085,7 @@ name: methodology-6
 ![:scale 90%](../slides/images/create-a-workspace.png)
 ]
 
-??? set variables up in your workspaces to get authentication to your environments
+
 ---
 name: methodology-7
 # Set Variables in Your Workspace
@@ -1094,7 +1094,9 @@ name: methodology-7
 ![:scale 70%](../slides/images/set-variables.png)
 ]
 
-??? set variables up in your workspaces to get authentication to your environments
+???
+
+set variables up in your workspaces to get authentication to your environments
 
 ---
 name: methodology-9
