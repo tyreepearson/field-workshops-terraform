@@ -526,7 +526,7 @@ name: types-of-policies-2
 - Policies can use the tfstate import
   - checks whether previously provisioned resources or data sources have attributes with values that are no longer allowed.
 
-??? 
+???
 
 A great way to add check all your previously previsioned resources
 ---
@@ -537,7 +537,7 @@ name: types-of-policies-3
   - checks workspace and run metadata and whether cost estimates for planned resources are within limits.
       - `# Determine proposed monthly cost proposed_cost = decimal.new(tfrun.cost_estimate.proposed_monthly_cost)`
 
-??? 
+???
 
 this can check run data and the cost estimation.
 ---
@@ -550,7 +550,7 @@ name: chapter-summary
   - Mocks can be generated from Terraform Cloud
   - Mocks can then be tested with **Sentinel CLI**
 
-??? 
+???
 
 overview of everything
 ---
@@ -668,7 +668,7 @@ name: policy-intro-0
 - Test
 - Print
 
-??? 
+???
 
 This is going to be the validation critera that e would see the in the cli. we also have to declare the critera that we are going to validate, so the VMs, networking ports, etc. The core cocept of a policy is the imports. ( all the data, functions, library that you need to use inside of sentinel policy ) then declare a set of critera. then define all the resource that you want to test against that critera. 
 ---
