@@ -208,7 +208,10 @@ name: with-sentinel
 ![:scale 100%](../slides/images/sentinel-with-workflow.png)
 ]
 
-??? with sentinel we interrupt this process and break the plan and apply phase into two different constructs. This allows us to take data from this plan and use it to check against our policy checks. We prevent you from making those legal or regulatory mistakes
+???
+
+with sentinel we interrupt this process and break the plan and apply phase into two different constructs. This allows us to take data from this plan and use it to check against our policy checks. We prevent you from making those legal or regulatory mistakes
+
 ---
 name: policys-passed
 # All Policy Checks Passed
@@ -217,7 +220,10 @@ name: policys-passed
 ![:scale 90%](../slides/images/checks-passed.png)
 ]
 
-??? it looks like this in the TFC solution. we go through the plan, cost estimation, then the policy checks are passed, then we go through thr apply phase. 
+??? 
+
+it looks like this in the TFC solution. we go through the plan, cost estimation, then the policy checks are passed, then we go through thr apply phase. 
+
 ---
 name: policys-passed2
 # All Policy Checks Passed
@@ -226,7 +232,10 @@ name: policys-passed2
 ![:scale 90%](../slides/images/checks-passed-verbose.png)
 ]
 
-??? this is what it looks like when you are validating invidual policies. going to see the sentinel results, what was evaluated, the enforcement levels, and all can be downloaded in a raw log json format, you can import this into this into a SIMP solution or anything of your auditing solutions.
+??? 
+
+this is what it looks like when you are validating invidual policies. going to see the sentinel results, what was evaluated, the enforcement levels, and all can be downloaded in a raw log json format, you can import this into this into a SIMP solution or anything of your auditing solutions.
+
 ---
 name: enforcement-levels
 # Sentinel Policy Enforcement Levels
