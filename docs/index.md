@@ -1567,7 +1567,7 @@ policy "restrict-ec2-instance-type" {
 
 ```
 
-??? 
+???
 
 Here is an example policy set might look like in your code. all of this can be exposed through the api as well.
 
