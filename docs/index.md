@@ -951,6 +951,8 @@ You can use three different methods for testing your Terraform Sentinel policies
 
 ???
 
+Sentinel has so much input whether its the plan, config, overall run. you need to have a way to test your policies on all this data. You can build actual infrastucture with terraform and use sentinel in this test environment. You can use mocks generated from Terraform plans, so you can actually test outside of the workflow as well. We will talk about how you get the files, how you use them, and prep your environment during this. 
+
 ---
 name: authoring-workflow
 # Introducing the Sentinel Authoring Workflow
@@ -960,6 +962,9 @@ For the purpose of this course and as a general recommendation we suggest using 
 - Using the Sentinel Simulator with mocks generated from Terraform plans.
 
 This allows a user to rapidly iterate, test and observe changes locally by simulating the process
+
+???
+
 
 ---
 name: methodology-0
@@ -977,6 +982,10 @@ name: methodology-0
 8. Deploy your policy
   - _Secret Step 9, relax and enjoy automated policy enforcement_
 
+
+??? 
+
+high level this is the workflow for writting sentinel policies which will include testing. This is a pretty standard development workflow, there is just somethings that are specific to terraform and sentinel in the first couple steps
 ---
 name: authoring-workflow-diagram
 #Authoring Workflow Diagram
@@ -985,6 +994,9 @@ name: authoring-workflow-diagram
 ![:scale 100%](../slides/images/authoring.png)
 ]
 
+???
+
+everything i said early related to this, generate the code, download the mocks, test against the mocks.
 ---
 name: methodology-1
 # Step 1 - Write Terraform Code
@@ -996,6 +1008,7 @@ name: methodology-1
 - Bonus Tip
   - **Create more than one instance to test positive and negative**
 
+??? the registry has alot of information on how to build about basic resources
 ---
 name: methodology-1
 # Create a Terraform Configuration: main.tf
@@ -1016,6 +1029,9 @@ resource "aws_instance" "ubuntu" {
 }
 ```
 
+???
+
+here is a basic example of how to build out a quick main tf config and some resources
 ---
 name: methodology-2
 # Terraform Terminology for Resources
@@ -1033,6 +1049,9 @@ resource "aws_instance" "ubuntu" {
   - Each occurrence of a resource is referred to as a **Resource Instance.**
   - This code will create two **Instances** of the resource since count was set to 2.
 
+???
+
+everyone should know this but this a resource, it has attributes to build resources.
 ---
 name: methodology-4
 # Integrate with Terraform Cloud
@@ -1054,6 +1073,10 @@ terraform {
 }
 ```
 
+
+???
+
+You can generate mocks using the free version of TFC. you can get a free TFC account and start working with your sentinel code. But to get your code connected to TFC you have to connect the backend of your config to TFC. 
 ---
 name: methodology-6
 #  Step 2 - Create a Workspace in the TFC/TFE UI
@@ -1062,6 +1085,7 @@ name: methodology-6
 ![:scale 90%](../slides/images/create-a-workspace.png)
 ]
 
+??? set variables up in your workspaces to get authentication to your environments
 ---
 name: methodology-7
 # Set Variables in Your Workspace
@@ -1069,6 +1093,8 @@ name: methodology-7
 .center[
 ![:scale 70%](../slides/images/set-variables.png)
 ]
+
+??? set variables up in your workspaces to get authentication to your environments
 
 ---
 name: methodology-9
@@ -1080,8 +1106,10 @@ Start a Terraform Plan then get your Mocks!
 ![:scale 85%](../slides/images/generate-mocks.png)
 ]
 
+
 ???
 
+this is going to download mock files, the tf/plan, tf/config/ tf/run json files.
 - From your local directory containing main.tf and backend.tf, run _terraform init_ to initialize your Terraform configuration.
 - Then run terraform plan.
 - The plan will run on the TFC server, but its results will be visible locally and in the TFC UI.
@@ -1098,6 +1126,9 @@ name: methodology-9
 ![:scale 100%](../slides/images/authoring-here.png)
 ]
 
+???
+
+at this poitn we have done all the TFC parts of this, we have build out our workspave, we run a plan, and we get our mocks. Now we go and build our policy
 ---
 name: methodology-10
 # Step 5 - Writing Sentinel Policies for TFC/TFE
@@ -1105,6 +1136,9 @@ name: methodology-10
 - The next set of slides walks you through a Sentinel policy called **"restrict-ec2-instance-type.sentinel"** that restricts the allowed sizes of AWS EC2 instances.
 - It breaks down the Sentinel code into smaller bites, clarifying what each section of the code is doing.
 
+???
+
+we talked a little bit about building policies and the different parts of the policy
 ---
 name: methodology-12
 # Sentinel Import Declarations
@@ -1114,6 +1148,9 @@ name: methodology-12
 import "tfplan-functions" as plan
 ```
 
+???
+
+we are going to go into this a little bit, the import declartion is availble in sentinel, this imports in information. you can take this from the TFC runs, we are basically hooking this tfc mock data into sentinel. In this import we are taking in a terraform function for the tf-plan mock.  
 ---
 name: methodology-13
 # List of Allowed Values
@@ -1123,6 +1160,9 @@ name: methodology-13
 allowed_types = ["t2.small", "t2.medium", "t2.large"]
 ```
 
+???
+
+this is a list of allowed values in a array
 ---
 name: methodology-14
 # Call Sentinel Functions to Find and Filter Resources
@@ -1136,6 +1176,9 @@ allEC2Instances = plan.find_resources("aws_instance")
 violatingEC2Instances = plan.filter_attribute_not_in_list(allEC2Instances, "instance_type", allowed_types, true)
 ```
 
+???
+
+then we are going to use shared functions from our function libraries or write our own function. We will use this to get the resources we care about.
 ---
 name: methodology-15
 # Calculate Boolean and Check it in Main Rule
@@ -1152,6 +1195,9 @@ main = rule {
 }
 ```
 
+???
+
+then we are going to write a rule or multiple rules then tie them into the main rules to determine the success of the sentinel policy. 
 ---
 name: common-functions
 # Common Functions - Find
@@ -1164,6 +1210,10 @@ name: common-functions
       - Simple, finds all resources by the type specified
       - **Remember we're looking for "aws_instance" as the Type**
 
+???
+
+these are common functions. some of the more common ones we use are the find_resource(type). you can use the plan data and this function to lets say find all the instances. 
+
 ---
 name: common-functions
 # Common Functions - Filter
@@ -1175,9 +1225,8 @@ name: common-functions
     - **evaluate_attribute(r, attribute)**
         - The filter functions all call the evaluate_attribute() function that recursively calls itself to evaluate attributes that can be deeply nested inside a resource or data source.
 
-???
-
-- This function has the following declaration:
+??? 
+This function has the following declaration:
 - **evaluate_attribute = func(r, attribute)**
 - The resource passed to the first call to the function should be in the form **rc.change.after** or just rc where rc is a resource change derived by applying filters to **tfplan.resource_changes.**
 - The attribute should be given as a string delimited by "." in which indices of lists start with 0: "storage_os_disk.0.managed_disk_type".
