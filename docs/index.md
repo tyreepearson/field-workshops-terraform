@@ -220,7 +220,7 @@ name: policys-passed
 ![:scale 90%](../slides/images/checks-passed.png)
 ]
 
-??? 
+???
 
 it looks like this in the TFC solution. we go through the plan, cost estimation, then the policy checks are passed, then we go through thr apply phase. 
 
@@ -232,7 +232,7 @@ name: policys-passed2
 ![:scale 90%](../slides/images/checks-passed-verbose.png)
 ]
 
-??? 
+???
 
 this is what it looks like when you are validating invidual policies. going to see the sentinel results, what was evaluated, the enforcement levels, and all can be downloaded in a raw log json format, you can import this into this into a SIMP solution or anything of your auditing solutions.
 
@@ -261,7 +261,8 @@ name: soft-mandatory
 ![:scale 90%](../slides/images/soft-mandatory.png)
 ]
 
-??? enforment is set at the polcy level. With Sentinel soft mandatory policy you have the ability to over ride this policy with an organsizational admin. 
+???
+enforment is set at the polcy level. With Sentinel soft mandatory policy you have the ability to over ride this policy with an organsizational admin. 
 ---
 name: policy-sets
 # Sentinel Policy Sets and Policies
@@ -271,7 +272,9 @@ name: policy-sets
 - They are usually created in VCS repositories and then registered with organizations using the Terraform Cloud UI or API.
 - Additionally, **Parameters** can be added to policy sets allowing the secure introduction of credentials needed by API endpoints invoked with the Sentinel HTTP import.
 
-??? the different between a policy and a policy set. policy sets are groups of sentinel policies, you have the ability to group together a collection of sentinel policies and make a set that you apply to a workspace. Sets allow you to mix and match policies that may need to only effect particular workspaces or be widespread on the entire organsization. Also you can have parameters that change based on environment. Like how terraform can have variables based on dev, qa, prod. you similiarly have parameters that change based on the changes of your infrastructure. This HTTP import can validate this external data. 
+???
+
+the different between a policy and a policy set. policy sets are groups of sentinel policies, you have the ability to group together a collection of sentinel policies and make a set that you apply to a workspace. Sets allow you to mix and match policies that may need to only effect particular workspaces or be widespread on the entire organsization. Also you can have parameters that change based on environment. Like how terraform can have variables based on dev, qa, prod. you similiarly have parameters that change based on the changes of your infrastructure. This HTTP import can validate this external data. 
 
 ---
 name: chapter-summary
@@ -281,7 +284,9 @@ name: chapter-summary
 - Terraform Cloud automatically runs Sentinel checks between **plan and apply**
 - Sentinel has different enforcement levels, **Advisory, Soft and Hard Mandatory**
 
-??? what yourve learned so far is sentinel is a policy as code framework. sentinel fits into your workflow during the plan and apply. Sentinel has 3 different enforcement levels, the Advisory, Sort and hard mandatory
+???
+
+what yourve learned so far is sentinel is a policy as code framework. sentinel fits into your workflow during the plan and apply. Sentinel has 3 different enforcement levels, the Advisory, Sort and hard mandatory
 
 ---
 class: title, smokescreen, shelf
@@ -332,7 +337,10 @@ name: what-do
   - Much much more!
       - HTTP Import can even call externally!!!
 
-??? Diving into the concepts and the polcies, Sentinel has the ability to check any resources inside Terraform. Sentinel is also embeded into of the hashicorp enterprise solutions. Whether its vault of consul. Import allows you to get data from a TF plan, TF config, the Run, or even alot more. Think of the HHTP import to query literally anything. Think of it as a wget or a call externall for any url. 
+???
+
+Diving into the concepts and the polcies, Sentinel has the ability to check any resources inside Terraform. Sentinel is also embeded into of the hashicorp enterprise solutions. Whether its vault of consul. Import allows you to get data from a TF plan, TF config, the Run, or even alot more. Think of the HHTP import to query literally anything. Think of it as a wget or a call externall for any url. 
+
 ---
 
 name: behind-the-scenes
@@ -342,7 +350,9 @@ name: behind-the-scenes
 ![:scale 100%](../slides/images/sentinel-logic.png)
 ]
 
-??? This is big R chart for sentinel to help break down whats happening behind the scenes. Sentinel is a validation pipeline. think of a pipeline wit ha large funnel inlet, an inlet funnel can be anyone inside your organsization that wants to provosion infrascture and sentinel only allows whats specified through this pipeline. This is a validation pipeline is automated to check for some roles. These roles with senitnel are logic or fine grained policies. So the process goes by importing data, then filtering the data, then building rules on this filtered data. Lastly evaluting the rules and determining whats passed or failed. 
+???
+
+This is big R chart for sentinel to help break down whats happening behind the scenes. Sentinel is a validation pipeline. think of a pipeline wit ha large funnel inlet, an inlet funnel can be anyone inside your organsization that wants to provosion infrascture and sentinel only allows whats specified through this pipeline. This is a validation pipeline is automated to check for some roles. These roles with senitnel are logic or fine grained policies. So the process goes by importing data, then filtering the data, then building rules on this filtered data. Lastly evaluting the rules and determining whats passed or failed. 
 
 ---
 name: what-does-it-look-like
@@ -352,7 +362,9 @@ name: what-does-it-look-like
 ![:scale 80%](../slides/images/show-sentinel.png)
 ]
 
-??? This is the sentinel playground. the sentinel playground allows you to similuate this lifeycle in a non production way. on the right is the mock data, the left is the policy, the bottom right is the output of the results. 
+???
+
+This is the sentinel playground. the sentinel playground allows you to similuate this lifeycle in a non production way. on the right is the mock data, the left is the policy, the bottom right is the output of the results. 
 ---
 name: normal-view
 # The UI View
@@ -361,7 +373,9 @@ name: normal-view
 ![:scale 90%](../slides/images/sentinel-check-yes-no.png)
 ]
 
-??? the UI view looks more like this, within the workspace you have sentinel fit into the run pipeline. In the plan we are going to spit out the mock data, and get the mock data to see the exact resources you would cosume and use it with sentinel. in this example we are checking whether the s3 bucket acl is private or not private. This could be policy by execption requirement, that aws buckets should be private so if it isnt please reach out to IT/Security organsization and can approve these requirements if we deem them valid. 
+???
+
+the UI view looks more like this, within the workspace you have sentinel fit into the run pipeline. In the plan we are going to spit out the mock data, and get the mock data to see the exact resources you would cosume and use it with sentinel. in this example we are checking whether the s3 bucket acl is private or not private. This could be policy by execption requirement, that aws buckets should be private so if it isnt please reach out to IT/Security organsization and can approve these requirements if we deem them valid. 
 
 ---
 name: lets-start
@@ -373,7 +387,9 @@ name: lets-start
   - That is our data!
 - So let's mock some data and **'Get Started with Sentinel'**
 
-??? Sentinel supports CLI, it just needs some mock data. Terraform has a plan method that can mock data, now with these plans we can start using sentinel 
+???
+
+Sentinel supports CLI, it just needs some mock data. Terraform has a plan method that can mock data, now with these plans we can start using sentinel 
 
 ---
 name: mock-intro
@@ -383,7 +399,10 @@ name: mock-intro
 ![:scale 90%](../slides/images/mock-highlight.png)
 ]
 
-??? we are going to take this mock and build it inside terraform cloud 
+???
+
+we are going to take this mock and build it inside terraform cloud 
+
 ---
 name: mock-intro
 # Sentinel Mocks in Terraform
@@ -397,7 +416,9 @@ name: mock-intro
 ![:scale 70%](../slides/images/where-mock.png)
 ]
 
-??? Now inside of TFC each of the invidiual workspace will generate a download mock. You can jump into the gui rn and download a mock from any of your workspace runs. A great way to start testing a validing your policies to see how the results would maybe get caught in the pipeline or not. This helps when you are testing out specific regex tests on your processes. there are multiple already exising policies. There is the policy public registry that has policies supported by Hashicorp. 
+???
+
+Now inside of TFC each of the invidiual workspace will generate a download mock. You can jump into the gui rn and download a mock from any of your workspace runs. A great way to start testing a validing your policies to see how the results would maybe get caught in the pipeline or not. This helps when you are testing out specific regex tests on your processes. there are multiple already exising policies. There is the policy public registry that has policies supported by Hashicorp. 
 
 ---
 name: mock-preview
@@ -422,7 +443,9 @@ variables = {
 		"value": "t3.large",
 	}
 ```
-??? what a mock looks like can be very long and in depth. its going to give you alot of data.
+???
+
+what a mock looks like can be very long and in depth. its going to give you alot of data.
 
 ---
 name: mock-preview
@@ -449,7 +472,9 @@ resource_changes = {
 				"role":        "potato-access-role"
 ```
 
-??? there is nothing inside of terraform that you cannot validate inside of sentinel. so anything you run through terraform, it can be quired and validated using sentinel. 
+???
+
+there is nothing inside of terraform that you cannot validate inside of sentinel. so anything you run through terraform, it can be quired and validated using sentinel. 
 
 ---
 name: mocks-in-terraform
@@ -465,7 +490,10 @@ name: mocks-in-terraform
   - gives metadata for Terraform runs and their workspaces as well as cost estimate data
 - **Some policies might use more than one of these imports.**
 
-??? When you download the mock file there are 4 mock files, the plan, config, state, and run mock. The tfplan mock is the data generated from plan, the config gets the varaibles, the tf state gets the pre and post data, the tfrun gets the cost estimatization and other data during the run process. 
+???
+
+When you download the mock file there are 4 mock files, the plan, config, state, and run mock. The tfplan mock is the data generated from plan, the config gets the varaibles, the tf state gets the pre and post data, the tfrun gets the cost estimatization and other data during the run process. 
+
 ---
 name: types-of-policies-0
 # Types of Terraform Sentinel Policies (0)
@@ -475,7 +503,9 @@ There are essentially four types of Terraform Sentinel policies corresponding to
   - restricts specific attributes of specific resources and data sources in the current Terraform plan.
       - `# Get all Azure Security Center Pricings allAzureSecCenterSubPricings = plan.find_resources("azurerm_security_center_subscription_pricing")`
 
-??? Here are a couple examples for each of the individual mock types. Day two will have you write each of your inidividual policies so this process here is to help you understand what it looks like and getting started. The tfplan allows us to restrict specific attributes of specific resources and data sources in the current plan
+???
+
+Here are a couple examples for each of the individual mock types. Day two will have you write each of your inidividual policies so this process here is to help you understand what it looks like and getting started. The tfplan allows us to restrict specific attributes of specific resources and data sources in the current plan
 ---
 name: types-of-policies-1
 # Types of Terraform Sentinel Policies (1)
