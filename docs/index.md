@@ -965,6 +965,7 @@ This allows a user to rapidly iterate, test and observe changes locally by simul
 
 ???
 
+This reiterates what i mentioned earlier.
 
 ---
 name: methodology-0
@@ -983,7 +984,7 @@ name: methodology-0
   - _Secret Step 9, relax and enjoy automated policy enforcement_
 
 
-??? 
+???
 
 high level this is the workflow for writting sentinel policies which will include testing. This is a pretty standard development workflow, there is just somethings that are specific to terraform and sentinel in the first couple steps
 ---
