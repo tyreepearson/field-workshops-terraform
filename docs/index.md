@@ -106,7 +106,7 @@ name: sentinel-overview2
 
 - (allowed_types = [”350xlarge”,”289ssmall”,”101xssmall”])
 
-??? 
+???
 
 Sentinel within terraform is apart of your provisoning workflow. You know the Terraform workflow to go through the terraform plan stage then the apply stage. the plan goes through the dry run no-op mode providing a guessimatiztion on  what would go through on an apply and hitting that target api. With sentinel we can pause this workflow and evluate some criteria. It ensures that your polices are checked everytime terraform runs 
 whether its througth a pipeline, cli, vcs, or through the gui. Takes your typical excel spreadsheet and codifies this. Turining these legal and regulartory requirements to fit into your workflow. This example here displays a instance type requirement that would be done with excel for a standard organiszation. We have these different requirements for allowed instance types. Sentinel will check to make sure these requirements are being followed otherwise throw some failed check.
